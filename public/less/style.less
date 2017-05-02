@@ -71,12 +71,23 @@ body {
 		}
 
 		.larger-images, .smaller-images {
-			color: #C02942;
+			color: #868686;
 			font-size: 16px;
 			text-transform: uppercase;
 			display: inline-block;
 			margin-right: 10px;
 			margin-bottom: 10px;
+			background: #e4e4e4;
+			padding: 10px;
+			border-radius: 5px;
+
+			&.selected {
+				color: #C02942;
+			}
+
+			@media screen and (max-width: 500px) {
+				display: none;
+			}
 		}
 
 		#busca {
@@ -136,7 +147,7 @@ body {
 				left: 0;
 				bottom: 0;
 				z-index: 10;
-				background: #D95B43;
+				background: #e4e4e4;
 				padding: 5px;
 				text-align: center;
 				font-size: 12px;
@@ -180,6 +191,7 @@ body {
 		    span {
 		    	font-size: 15px;
 		    	display: block;
+		    	color: #907f47;
 		    }
 		}
 
@@ -188,17 +200,25 @@ body {
 			width: 40%;
 			height: auto;
 
+			@media screen and (max-width: 500px) {
+				width: 100%;
+			}
+
 			#image-single {
 				display: block;
 				position: relative;
 				width: 100%;
 				height: auto;
+				border-top-left-radius: 5px;
+				border-top-right-radius: 5px;
+				overflow: hidden;
 
 				img {
 					width: 100%;
 					height: auto;
 					position: relative;
 					z-index: 5;
+					float: left;
 				}
 
 				a {
@@ -209,11 +229,11 @@ body {
 					right: 0;
 					top: 0;
 					z-index: 10;
-					background: #D95B43;
+					background: #e4e4e4;
 					text-align: center;
 					text-decoration: none;
 					font-size: 30px;
-					color: #ecd078;
+					color: #868686;
 
 					&.liked {
 						color: #542437;
@@ -236,7 +256,13 @@ body {
 			}
 
 			.description {
-				padding: 10px 0 40px;
+				display: inline-block;
+				width: 100%;
+				height: auto;
+				padding: 30px 15px;
+				background: #e4e4e4;
+				border-bottom-left-radius: 5px;
+				border-bottom-right-radius: 5px;
 			}
 		}
 

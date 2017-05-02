@@ -188,6 +188,10 @@ $(function(){
 	$(document).on('click', '.larger-images', function(e){
 		e.preventDefault();
 		$('.container-shot').removeClass('col-md-4').removeClass('col-lg-3').addClass('col-md-6').addClass('col-lg-6');
+
+		$('.smaller-images').removeClass('selected');
+		$(this).addClass('selected');
+
 		$("#logado .shots .shot a img").each(function(){
 			if ($(this).attr('data-hidpi')) {
 				var newURL = $(this).attr('data-hidpi');
@@ -200,6 +204,8 @@ $(function(){
 	$(document).on('click', '.smaller-images', function(e){
 		e.preventDefault();
 		$('.container-shot').removeClass('col-md-6').removeClass('col-lg-6').addClass('col-md-4').addClass('col-lg-3');
+		$('.larger-images').removeClass('selected');
+		$(this).addClass('selected');
 
 		$("#logado .shots .shot a img").each(function(){
 			
