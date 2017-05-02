@@ -48,7 +48,7 @@ function searchComponent(the_shots) {
 }
 
 function detailsComponent(the_shots) {
-	console.log(the_shots);
+
 	vueApp = new Vue({
 	    el: '#app',
 	    data: {
@@ -114,7 +114,7 @@ function typePage() {
 
 		if (!localStorage.getItem('singleShotID')) {
 			localStorage.setItem('singleShotID', tmp[1]);
-			console.log('Sem storage');
+			
 		}
 
 		var urlShot = 'https://api.dribbble.com/v1/shots/'+singleShotID;
@@ -130,7 +130,7 @@ function typePage() {
 		  	detailsComponent(the_shots);
 		  },
 		  error: function(jqxhr) {
-		    console.log(jqxhr);
+		    
 		  }
 		});
 	} else {
@@ -152,7 +152,7 @@ function typePage() {
 			  	localStorage.setItem('userID', res.id);
 			  },
 			  error: function(jqxhr) {
-			    console.log(jqxhr);
+			    
 			  }
 			});
 
@@ -167,12 +167,18 @@ function typePage() {
 			  	searchComponent(the_shots);
 			  },
 			  error: function(jqxhr) {
-			    console.log(jqxhr);
+			    
 			  }
 			});
 		}
 	}
 }
+
+
+
+
+
+
 
 $(function(){
 	
