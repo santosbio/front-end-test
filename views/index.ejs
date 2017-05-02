@@ -2,16 +2,74 @@
 <html lang="pt-br">
 <head>
 	<meta charset="UTF-8">
-	<title>Front-end Test</title>		
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Front-end Test</title>
+	<link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+	<link rel="stylesheet" href="/stylesheets/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="/stylesheets/style.css">		
 </head>
 <body>
 
-	<div id="app">
-	  <p>{{ message }}</p>
+	<div class="container-fluid" id="app">
+	  <a href="/" id="logo">
+	  	<img src="/images/dribbble.png" alt="">
+	  </a>
+
+	  <div class="row">
+	  	<div class="col-lg-12" id="login">
+	  		<h1>Aplicativo de listagem de Shots</h1>
+	  		<p>Para usar este aplicativo, é necessário conceder algumas permissões utilizando sua conta no Dribbble. Para conceder essas permissões, clique no botão abaixo:</p>
+	  		<p><br></p>
+	  		<a href="https://dribbble.com/oauth/authorize?client_id=98a138389aa6f4a1aafd065936902aceeb142b6ec6c83390b9123b61fe8bafe5&scope=public+write" class="btn btn-default btn-lg">
+	  			Autorizar aplicativo
+	  		</a>
+	  	</div>
+	  </div>
+
+	  <div class="row" id="logado">	  	
+
+	  	<div class="col-lg-12">
+	  		<h1>Últimos Shots</h1>
+	  		<br>
+	  		<a href="#" class="larger-images">
+	  			<span class="glyphicon glyphicon-th-large"></span> Imagens maiores
+	  		</a> 
+	  		<a href="#" class="smaller-images">
+	  			<span class="glyphicon glyphicon-th"></span> Imagens menores
+	  		</a> 
+
+	  		<form>
+		  		<input type="text" v-model="searchString" placeholder="Digite sua busca" id="busca" />
+		  	</form>
+
+	  		<div class="row shots">
+	  			<div  v-for="shot in filteredShots" class="col-xs-12 col-md-4 col-lg-3 container-shot">
+	  				<div class="shot">
+	  					<div class="drib-image">
+	  						<a href="/shot" v-bind:data-id="shot.id">
+	  							<img v-bind:src="shot.images.normal" v-bind:alt="shot.title" v-bind:data-normal="shot.images.normal" v-bind:data-hidpi="shot.images.hidpi" />
+	  						</a>
+	  					</div>
+	  					<div class="drib-detail">
+	  						<a href="/shot" v-bind:data-id="shot.id">{{shot.title}}</a>
+	  						<ul>
+	  							<li class="views"><span class="glyphicon glyphicon-eye-open"></span> {{shot.views_count}}</li>
+	  							<li class="likes"><span class="glyphicon glyphicon-heart"></span> {{shot.likes_count}}</li>
+	  							<li class="comments"><span class="glyphicon glyphicon-comment"></span> {{shot.comments_count}}</li>
+	  						</ul>
+	  					</div>
+	  				</div>
+	  			</div>
+	  		</div>
+	  	</div>
+	  	
+	  </div>
 	</div>
 	
 	<script src="/javascripts/vue.min.js"></script>
 	<script src="/javascripts/jquery-3.2.1.min.js"></script>
+	<script src="/javascripts/bootstrap.min.js"></script>
 	<script src="/javascripts/scripts.js"></script>
 
 </body>
