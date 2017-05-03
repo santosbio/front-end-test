@@ -1,2 +1,4 @@
 # front-end-test
-Para rodaro projeto, basta executar o comando `npm start` na pasta do projeto.
+Para rodar o projeto, basta executar o comando `npm start` em sua pasta (frontendtest).
+
+Projeto realizado utilizando Bootstrap, Vue.js, npm, express e LESS.
