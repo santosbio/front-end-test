@@ -43,23 +43,8 @@ body {
 		}
 	}
 
-	#login {
-		display: block;
-		text-align: center;
-
-		h1 {
-			.verdana;
-			font-size: 40px;
-			color: #c02942;
-			padding: 10px 0 40px;
-			text-transform: uppercase;
-			text-align: center;
-		}
-		
-	}
-
 	#logado {
-		display: none;
+		display: block;
 
 		h1 {
 			.verdana;
@@ -221,7 +206,7 @@ body {
 					float: left;
 				}
 
-				a {
+				.likeShot {
 					display: block;					
 					width: 60px;
 					height: 60px;
@@ -235,9 +220,35 @@ body {
 					font-size: 30px;
 					color: #868686;
 
-					&.liked {
-						color: #542437;
+					span {
+						vertical-align: top;
+					    margin-top: 8px;
+					    line-height: 1;
+					    width: 100%;
 					}
+
+					small {
+						font-size: 12px;
+						display: inline-block;
+						vertical-align: top;
+						width: 100%;
+						font-family: Arial, Helvetica, sans-serif;
+					}
+				}
+
+				.viewShot {
+					display: block;					
+					width: 60px;
+					height: 60px;
+					position: absolute;
+					right: 60px;
+					top: 0;
+					z-index: 10;
+					background: #e4e4e4;
+					text-align: center;
+					text-decoration: none;
+					font-size: 30px;
+					color: #868686;
 
 					span {
 						vertical-align: top;
@@ -251,6 +262,37 @@ body {
 						display: inline-block;
 						vertical-align: top;
 						width: 100%;
+						font-family: Arial, Helvetica, sans-serif;
+					}
+				}
+
+				.commentShot {
+					display: block;					
+					width: 60px;
+					height: 60px;
+					position: absolute;
+					right: 120px;
+					top: 0;
+					z-index: 10;
+					background: #e4e4e4;
+					text-align: center;
+					text-decoration: none;
+					font-size: 30px;
+					color: #868686;
+
+					span {
+						vertical-align: top;
+					    margin-top: 10px;
+					    line-height: 1;
+					    width: 100%;
+					}
+
+					small {
+						font-size: 12px;
+						display: inline-block;
+						vertical-align: top;
+						width: 100%;
+						font-family: Arial, Helvetica, sans-serif;
 					}
 				}
 			}
@@ -259,10 +301,26 @@ body {
 				display: inline-block;
 				width: 100%;
 				height: auto;
-				padding: 30px 15px;
+				padding: 30px 15px 20px;
 				background: #e4e4e4;
 				border-bottom-left-radius: 5px;
 				border-bottom-right-radius: 5px;
+				margin-bottom: 30px;
+
+				.tags {
+					display: block;
+					padding: 10px;
+					text-align: center;
+
+					b {
+						display: inline-block;
+						vertical-align: top;
+						color: #fff;
+						padding: 5px;
+						background: #c02942;
+						margin: 2px;
+					}
+				}
 			}
 		}
 

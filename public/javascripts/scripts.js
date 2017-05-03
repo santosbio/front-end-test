@@ -48,6 +48,7 @@ function searchComponent(the_shots) {
 }
 
 function detailsComponent(the_shots) {
+	var the_tags = '';
 
 	vueApp = new Vue({
 	    el: '#app',
@@ -57,50 +58,11 @@ function detailsComponent(the_shots) {
 	        user: the_shots.user.name,
 	        likes_count: the_shots.likes_count,
 	        images: the_shots.images.normal,
+	        comments_count: the_shots.comments_count,
+	        views_count: the_shots.views_count,
+	        tags: the_shots.tags,
 	        id: the_shots.id
 	    }
-	});
-
-	// Exibe o conteúdo
-	$('#logado').css({'display': 'block'});
-
-	// verifica se o item já foi curtido
-	var myLikeURL = 'https://api.dribbble.com/v1/shots/'+singleShotID+'/like';
-
-	$.ajax({
-	  url: myLikeURL,
-	  beforeSend: function(jqxhr) {
-	    jqxhr.setRequestHeader('Authorization', 'Bearer ' + access_token);
-	  },
-	  statusCode: {
-	    404: function() {
-	      $('.likeShot').removeClass('liked')
-	    },
-	    200: function() {
-	      $('.likeShot').addClass('liked');
-	    }
-	  }
-	});
-
-}
-
-function likeShot() {
-	// verifica se o item já foi curtido
-	var myLikeURL = 'https://api.dribbble.com/v1/shots/'+singleShotID+'/like';
-
-	$.ajax({
-	  type: 'POST',
-	  url: myLikeURL,
-	  data: { oauth: localStorage.getItem('token')},
-	  beforeSend: function(jqxhr) {
-	    jqxhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('token'));
-	  },
-	  success: function(res) {
-	  	// $('.likeShot').addClass('liked');
-	  },
-	  error: function(jqxhr) {
-	    // $('.likeShot').removeClass('liked');
-	  }
 	});
 }
 
@@ -112,11 +74,6 @@ function typePage() {
 		var tmp = url.split('?id=');
 		singleShotID = tmp[1];
 
-		if (!localStorage.getItem('singleShotID')) {
-			localStorage.setItem('singleShotID', tmp[1]);
-			
-		}
-
 		var urlShot = 'https://api.dribbble.com/v1/shots/'+singleShotID;
 
 		$.ajax({
@@ -127,6 +84,7 @@ function typePage() {
 		  },
 		  success: function(res) {
 		  	the_shots = res;
+		  	console.log(the_shots);
 		  	detailsComponent(the_shots);
 		  },
 		  error: function(jqxhr) {
@@ -134,43 +92,21 @@ function typePage() {
 		  }
 		});
 	} else {
-		// Verifica se o usuário autorizou o aplicativo, e carrega os shots
-		if (!localStorage.getItem('token')) {
-			var tmp = url.split('?code=');
-			token = tmp[1];
-			localStorage.setItem('token', token);
-		} else {
-			$('#login').css({'display': 'none'});
 
-			$.ajax({
-			  type: 'GET',
-			  url: 'https://api.dribbble.com/v1/user',
-			  beforeSend: function(jqxhr) {
-			    jqxhr.setRequestHeader('Authorization', 'Bearer ' + access_token);
-			  },
-			  success: function(res) {
-			  	localStorage.setItem('userID', res.id);
-			  },
-			  error: function(jqxhr) {
-			    
-			  }
-			});
-
-			$.ajax({
-			  type: 'GET',
-			  url: 'https://api.dribbble.com/v1/shots/?per_page=40&list=debuts',
-			  beforeSend: function(jqxhr) {
-			    jqxhr.setRequestHeader('Authorization', 'Bearer ' + access_token);
-			  },
-			  success: function(res) {
-			  	the_shots = res;
-			  	searchComponent(the_shots);
-			  },
-			  error: function(jqxhr) {
-			    
-			  }
-			});
-		}
+		$.ajax({
+		  type: 'GET',
+		  url: 'https://api.dribbble.com/v1/shots/?per_page=40&list=debuts',
+		  beforeSend: function(jqxhr) {
+		    jqxhr.setRequestHeader('Authorization', 'Bearer ' + access_token);
+		  },
+		  success: function(res) {
+		  	the_shots = res;
+		  	searchComponent(the_shots);
+		  },
+		  error: function(jqxhr) {
+		    
+		  }
+		});
 	}
 }
 
@@ -215,21 +151,4 @@ $(function(){
 		});
 	});
 
-	// Curte/Descurte o shot
-	$(document).on('click', '.likeShot', function(e){
-		e.preventDefault();
-
-		if($(this).hasClass('liked')) {
-			$(this).removeClass('liked');
-			var tmpLike = parseInt($(this).find('small').text())-1;
-			$(this).find('small').text(tmpLike);
-		} else {
-			$(this).addClass('liked');
-			var tmpLike = parseInt($(this).find('small').text())+1;
-			$(this).find('small').text(tmpLike);
-		}
-
-		likeShot();
-
-	});
 });
